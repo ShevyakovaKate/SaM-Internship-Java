@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      th:with="lang=${#locale.language}" th:lang="${lang}"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="user-order">
+    <div class="row">
+        <div class="col-xs-2 col-md-2">
+            <img class="img-responsive" src="http://placehold.it/120x80" alt="prewiew">
+        </div>
+        <div class="col-xs-4 col-md-6">
+            <h4 class="product-name"><strong th:text="${order.giftCertificate.name}"></strong></h4>
+            <h4>
+                <small th:text="${order.giftCertificate.description}"></small>
+            </h4>
+        </div>
+        <div class="col-xs-6 col-md-4 row">
+            <div class="col-xs-6 col-md-6 text-right" style="padding-top: 5px">
+                <h6><strong th:text="${order.payStatus.name}"><span class="text-muted">$</span></strong></h6>
+            </div>
+            <div class="col-xs-6 col-md-6 text-right" style="padding-top: 5px">
+                <h6><strong th:text="${order.giftCertificate.price}"><span class="text-muted">$</span></strong></h6>
+            </div>
+
+            <div class="col-xs-4 col-md-4">
+                <span th:if="${order.payStatus.name} == 'WAIT'">
+                    <button type="button" th:data-order-id="${order.id}"
+                            class="btn btn-outline-success btn-xs btn-pay" th:text="#{btn.buy} ">
+                    <i class="far fa-credit-card"></i>
+                    </button>
+                </span>
+
+            </div>
+            <div class="col-xs-2 col-md-2">
+                <button id="btn-delete" th:data-order-id="${order.id}" type="button" class="btn btn-outline-danger btn-xs btn-delete" >
+                    <i class="fa fa-trash-alt" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+
+</body>
+</html>

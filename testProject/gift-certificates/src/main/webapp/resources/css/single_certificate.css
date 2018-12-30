@@ -1,0 +1,10 @@
+#cert_img {
+    width:500px; /* you can use % */
+    height: auto;
+}
+#div-non-auth {
+    display: none;
+}
+#user-name-span {
+    display: none;
+}

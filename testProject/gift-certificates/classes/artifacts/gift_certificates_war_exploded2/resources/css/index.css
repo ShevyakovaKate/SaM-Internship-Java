@@ -1,0 +1,13 @@
+#btn-search {
+    background: #7952B3;
+    color: #ffffff;
+}
+.img-bg {
+    width: 80%;
+    height: 300px;
+    border-radius: 21px 21px 0 0;
+}
+
+.position-relative {
+    background-image: image("resources/img/Christmas_wallpapers_Purple_gift_boxes_on_Christmas_052773_.jpg");
+}

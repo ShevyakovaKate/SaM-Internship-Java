@@ -1,0 +1,15 @@
+#user-icon {
+    width: 75px;
+    height: 75px;
+
+}
+
+#sing-in-container {
+    padding-top: 4em;
+    padding-bottom: 4em;
+}
+
+#wp-submit {
+    background: #7952B3;
+    color: #ffffff;
+}

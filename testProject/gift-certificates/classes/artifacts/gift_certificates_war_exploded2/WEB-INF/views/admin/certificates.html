@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html th:with="lang=${#locale.language}" th:lang="${lang}"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="/resources/lib/mustache.min.js"></script>
+
+    <script type="text/javascript" src="/resources/js/header.js"></script>
+    <script type="text/javascript" src="/resources/js/admin/certificates.js"></script>
+
+    <title>Title</title>
+</head>
+<body>
+
+<div th:replace="template/header.html :: header"></div>
+
+<div class="row justify-content-center bg-light">
+
+    <div th:replace="template/admin-menu-bar.html :: admin-menu-bar"></div>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">All certificates</h1>
+        </div>
+
+        <div class="p-3 pt-1 p-md-5 m-md-3 text-center bg-light col-md-8 border-dark rounded">
+
+            <div  class="form-inline form-navbar my-2 my-lg-3">
+                <input id="searchInput" class="col-2 form-control" name="textPart" type="text" autocomplete="off" th:placeholder="#{label.search.placeholder}" >
+            </div>
+
+            <div  class="form-inline form-navbar my-2 my-lg-3">
+                <a role="button" th:href="@{~/admin/certificate/add}" class="col-2 btn btn-outline-success btn-block" th:text="#{btn.cert.add}"></a>
+            </div>
+
+            <table class="shadow-lg table table-striped table-bordered">
+                <thead>
+                <tr >
+                    <th scope="col">#</th>
+                    <th scope="col" th:text="#{certificate.field.name}"></th>
+                    <th scope="col"  th:text="#{certificate.field.description}"></th>
+                    <th scope="col" th:text="#{certificate.field.duration}"></th>
+                    <th scope="col" th:text="#{certificate.field.date.creation}"></th>
+                    <th scope="col" th:text="#{certificate.field.date.modification}"></th>
+                    <th scope="col" th:text="#{certificate.field.price}"></th>
+                    <th scope="col" th:text="#{label.certificate.modification}"></th>
+                </tr>
+
+                </thead>
+                <tr data-th-each="certificate : ${certificateList}">
+                    <th scope="col" th:text="${certificate.id}"></th>
+                    <th scope="col" class="font-weight-normal text-truncate" style="max-width: 200px;" th:text="${certificate.name}"></th>
+                    <th scope="col" class="font-weight-normal text-truncate" style="max-width: 400px;" th:text="${certificate.description}"></th>
+                    <th scope="col" class="font-weight-normal" th:text="${certificate.duration}"></th>
+                    <th scope="col" class="font-weight-normal" th:text="${certificate.dateOfCreation}" style="min-width: 122px;"></th>
+                    <th scope="col" class="font-weight-normal" th:text="${certificate.dateOfModification}" style="min-width: 122px;"></th>
+                    <th scope="col" class="font-weight-normal" th:text="${certificate.duration}"></th>
+                    <th scope="col" >
+                        <div class="row">
+                            <div class="col-xs-6 text-left">
+                                <a role="button" th:href="@{'~/admin/certificates/' + ${certificate.id}}" class="btn btn-outline-warning btn-block" th:text="#{btn.change}"></a>
+                            </div>
+                            <div class="col-xs-6 text-right">
+
+                                <button type="submit" th:data-certificate-id="${certificate.id}" class="btn btn-outline-danger btn-block btn-delete" th:text="#{btn.delete}"></button>
+                                <!--<form th:action="@{'/certificates/delete/{id}'(id=${certificate.id})}" th:method="delete">
+                                    <button type="submit" th:data-certificate-id="${certificate.id}" class="btn btn-outline-danger btn-block btn-delete" th:text="#{btn.cert.delete}"></button>
+                                </form>-->
+                                <input type="hidden" id="_csrf" th:value="${_csrf.token}"/>
+                                <input type="hidden" id="_csrf_header" th:value="${_csrf.getHeaderName()}"/>
+
+                            </div>
+
+                        </div>
+                    </th>
+
+                </tr>
+            </table>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div th:replace="template/footer.html :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html th:with="lang=${#locale.language}" th:lang="${lang}"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div class="shadow-lg col-md-4" th:fragment="certificate-card">
+    <div class="card mb-4 shadow-sm">
+        <img id="cert_img" class="card-img-top" style="content: url(/resources/img/cert-card.png)" alt="Card image cap"
+             width="225" height="225">
+        <div class="card-body">
+            <p class="card-text" th:text="${certificate.name}"></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <a type="button" class="btn btn-sm btn-outline-secondary view-button"
+                       th:href="@{'/certificates/'+${certificate.id}}" th:text="#{btn.view}">View</a>
+                </div>
+                <small class="text-muted" th:text="${certificate.price}"></small>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

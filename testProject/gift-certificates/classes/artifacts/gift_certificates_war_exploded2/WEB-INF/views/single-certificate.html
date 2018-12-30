@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html th:with="lang=${#locale.language}" th:lang="${lang}"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>Certificate</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+
+    <script src="/resources/lib/mustache.min.js"></script>
+
+    <script type="text/javascript" src="/resources/js/single-certificate.js"></script>
+
+    <link rel="stylesheet" href="/resources/css/single_certificate.css">
+
+    <script type="text/javascript" src="/resources/js/header.js"></script>
+
+
+</head>
+<body>
+
+<div th:replace="template/header.html :: header"></div>
+
+<div class="certificate-template">
+    <section class="section">
+        <div class="container">
+            <div class="row">
+
+
+                <div id="container" style="overflow: hidden">
+                    <div id="content" role="main">
+
+                        <input id="cert-id" type="hidden" th:value="${certificate.id}">
+                        <h1 class="d-none d-lg-block mb-3" th:text="${certificate.name}"></h1>
+                        <div style="overflow: hidden">
+                            <div class="row">
+                                <div class="col-lg-8 mb-md-0 mb-3">
+                                    <div class="post-7340 product type-product status-publish has-post-thumbnail product_cat-landing-corporate first instock downloadable shipping-taxable purchasable product-type-simple">
+                                        <div><img class="shadow-lg" src="#" alt="Certifiacte page"></div>
+
+
+                                        <h2 th:text="#{label.description}"></h2>
+
+
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show mt-2 mt-lg-5 active" id="description-tab"
+                                                 role="tabpanel">
+                                                <div class="theme-description">
+                                                    <p th:text="${certificate.description}"></p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+
+                                    </div><!-- .summary -->
+                                </div>
+                            </div>
+
+                            <div id="tags-container">
+                            </div>
+
+                            <div class="col-lg-8 mb-md-0 mb-3">
+                                <div class="row">
+                                    <h3 th:text="${certificate.price}"></h3>
+
+
+                                    <form class=" btn-block">
+                                        <div sec:authorize="isAuthenticated()">
+                                            <span id="user-name-span" th:text="${#authentication.getPrincipal().getUsername()}"></span>
+                                            <button id="btn-buy-authenticated" type="submit"
+                                                    class="btn btn-brand btn-block btn-checkout"><span
+                                                    class="btn-text" th:text="#{btn.buy}"></span></button>
+                                        </div>
+                                        <div sec:authorize="isAnonymous()">
+                                            <button id="btn-buy-anonymous" type="submit"
+                                                    class="btn btn-brand btn-block btn-checkout"><span
+                                                    class="btn-text" th:text="#{btn.buy}"></span></button>
+                                            <div id="div-non-auth">
+                                                <div class="alert alert-danger" role="alert">
+                                                    This is a danger alert—check it out!
+                                                </div>
+                                                <ul>
+                                                    <li  sec:authorize="isAnonymous()" class="nav-item">
+                                                        <a class="nav-link" id="btn_sign_in" th:href="@{/login}" th:text="#{btn.sign.in}"></a>
+                                                    </li>
+
+                                                    <li  sec:authorize="isAnonymous()" class="nav-item">
+                                                        <a class="nav-link" id="btn_sign_up" th:href="@{/registration}" th:text="#{btn.sign.up}"></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+
+                                        <input type="hidden" id="_csrf" th:value="${_csrf.token}"/>
+                                        <input type="hidden" id="_csrf_header" th:value="${_csrf.getHeaderName()}"/>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</div>
+
+<div th:replace="template/footer.html :: footer"></div>
+
+<script type="text/javascript"
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+
+</body>
+</html>
